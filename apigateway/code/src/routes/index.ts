@@ -10,6 +10,7 @@ const router: Router = Express.Router();
 const USERS_SERVICE_URL = process.env.USERS_SERVICE_URL || 'http://localhost:3012';
 const TASKS_SERVICE_URL = process.env.TASKS_SERVICE_URL || 'http://localhost:3010';
 const SHOP_SERVICE_URL = process.env.SHOP_SERVICE_URL || 'http://localhost:3014';
+const ACHIEVEMENTS_SERVICE_URL = process.env.ACHIEVEMENTS_SERVICE_URL || 'http://localhost:3020';
 
 // helper to fix POST/PUT body
 function fixRequestBody(proxyReq: any, req: Request, res: Response) {
@@ -56,10 +57,17 @@ const taskProxy: RequestHandler = createProxyMiddleware({
   ...commonProxyOptions,
 });
 
+// Achievements Proxy
+const achievementsProxy: RequestHandler = createProxyMiddleware({
+  target: `${ACHIEVEMENTS_SERVICE_URL}/achievements`,
+  ...commonProxyOptions,
+});
+
 // Use Proxies
 router.use('/auth', authProxy);
 router.use('/users', usersProxy);
 router.use('/shop', shopProxy);
 router.use('/tasks', taskProxy);
+router.use('/achievements', achievementsProxy);
 
 export default router;
