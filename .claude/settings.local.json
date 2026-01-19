@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: Update cookie settings for cross-origin production deployment\n\n- Set secure=true and sameSite=none in production\n- Required for cross-origin cookie handling between frontend and API\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: Update cookie settings for cross-origin production deployment\n\n- Set secure=true and sameSite=none in production\n- Required for cross-origin cookie handling between frontend and API\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)"
     ]
   }
 }

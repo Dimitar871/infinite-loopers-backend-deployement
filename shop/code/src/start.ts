@@ -37,8 +37,8 @@ app.get('/health', (req: Request, res: Response) => {
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
-// Main routes
-app.use('/shop', ShopRouter);
+// Main routes (mounted at root since API gateway handles /shop prefix)
+app.use('/', ShopRouter);
 
 // 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
