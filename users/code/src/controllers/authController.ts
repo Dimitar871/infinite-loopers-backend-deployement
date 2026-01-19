@@ -64,11 +64,12 @@ export async function login(req: Request, res: Response, next: NextFunction): Pr
       return;
     }
 
+    const isProduction = process.env.NODE_ENV === 'production';
     res.cookie('userId', user.id, {
       httpOnly: false,
-      secure: false,
+      secure: isProduction,
       path: '/',
-      sameSite: 'lax'
+      sameSite: isProduction ? 'none' : 'lax'
     });
 
     res.status(200).json({
@@ -82,6 +83,11 @@ export async function login(req: Request, res: Response, next: NextFunction): Pr
 }
 
 export async function logout (req: Request, res: Response) {
-    res.clearCookie('userId', { path: '/' });
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.clearCookie('userId', {
+      path: '/',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax'
+    });
     res.status(200).json({ success: true, message: 'Logged out' });
 };
